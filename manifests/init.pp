@@ -4,53 +4,63 @@ class { 'rabbitmq':
   service_manage    => true,
   service_ensure    => 'running',
   port              => '5672',
-  require => Class['erlang'],
+  require           => Class['erlang'],
 }
 
 rabbitmq_user { 'testuser':
   admin    => true,
   password => 'S3cr3t',
+  provider => 'rabbitmqctl',
 }
 
-#rabbitmq_vhost { 'golang-dev':
-#  ensure => present,
-#}
+rabbitmq_vhost { 'golang-vhost':
+  ensure   => present,
+  provider => 'rabbitmqctl',
+}
 
-#rabbitmq_exchange { 'exchange-01@golang-dev':
-#  user     => 'testuser',
-#  password => 'S3cr3t',
-#  type     => 'topic',
-#  ensure   => present,
-#  internal => false,
-#  auto_delete => false,
-#  durable => true,
-#  arguments => {
-#    hash-header => 'message-distribution-hash'
-#  }
-#}
+rabbitmq_user_permissions { 'testuser@golang-vhost':
+  configure_permission => '.*',
+  read_permission      => '.*',
+  write_permission     => '.*',
+}
 
-#rabbitmq_queue { 'quwuw-01@golang-dev':
-#  user        => 'testuser',
-#  password    => 'S3cr3t',
-#  durable     => true,
-#  auto_delete => false,
-#  arguments   => {
-#    x-message-ttl => 123,
-#    x-dead-letter-exchange => 'other'
-#  },
-#  ensure      => present,
-#}
+rabbitmq_exchange { 'test-exchange@golang-vhost':
+  user     => 'testuser',
+  password => 'S3cr3t',
+  type     => 'topic',
+  ensure   => present,
+  internal => false,
+  auto_delete => false,
+  durable => true,
+  arguments => {
+    hash-header => 'message-distribution-hash'
+  },
+}
+
+rabbitmq_queue { 'test-queue@golang-vhost':
+  user        => 'testuser',
+  password    => 'S3cr3t',
+  durable     => true,
+  auto_delete => false,
+  arguments   => {
+    x-message-ttl => 123,
+    x-dead-letter-exchange => 'other'
+  },
+  ensure      => present,
+}
 
 class { 'java' :
   package => 'java-1.8.0-openjdk-devel',
 }
 
 class { 'zookeeper':
-  manage_service_file => true,
-  repo   => 'cloudera',
-  cdhver     => '5',
+  #manage_service_file  => true,
+  manage_service       => true,
+  service_provider    => 'systemd',
+  repo                 => 'cloudera',
+  cdhver               => '5',
   initialize_datastore => true,
-  require => Class['java'],
+  require              => Class['java'],
 }
 
 class { 'golang':
@@ -70,7 +80,7 @@ class { 'postgresql::server':
   postgres_password          => 'S3cr3t',
 }
 
-postgresql::server::db { 'mydatabasename':
+postgresql::server::db { 'golang-database':
   user     => 'testuser',
   password => postgresql_password('testuser', 'S3cr3t'),
 }
