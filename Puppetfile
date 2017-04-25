@@ -1,0 +1,7 @@
+mod 'puppetlabs-rabbitmq', '5.6.0'
+mod 'puppetlabs-java', '1.6.0'
+mod 'dcoxall-golang', '1.2.0'
+mod 'deric-zookeeper', '0.7.2'
+mod 'garethr-erlang', '0.3.0'
+mod 'puppetlabs-postgresql', '4.9.0'
+mod 'puppetlabs-stdlib', '4.16.0'
