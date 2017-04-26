@@ -68,7 +68,7 @@ class { 'golang':
   workspace => '/usr/local/src/go',
 }
 
-yum::group { 'X Window System':
+yum::group { 'Development Tools':
   ensure  => present,
   timeout => 600,
 }

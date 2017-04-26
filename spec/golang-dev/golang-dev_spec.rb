@@ -61,4 +61,8 @@ describe "Test golang package" do
   describe command('/usr/local/go/bin/go version') do
     its(:stdout) { should match /go version go1.8.1 linux\/amd64/ }
   end
+
+  describe package('gcc') do
+    it { should be_installed }
+  end
 end
