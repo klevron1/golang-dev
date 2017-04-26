@@ -21,6 +21,10 @@ describe "Test postgresql-9.4 package and service" do
     it { should be_installed }
   end
 
+  describe package('postgresql94-contrib') do
+    it { should be_installed }
+  end
+
   describe service('postgresql-9.4') do
     it { should be_enabled }
     it { should be_running }

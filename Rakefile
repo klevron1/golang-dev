@@ -57,3 +57,7 @@ task :modules do
   `r10k puppetfile install -v`
 end
 
+desc 'open psql prompt within the golang-dev vm'
+task :psql do
+  run_ssh_command('/usr/bin/psql -h localhost -U postgres')
+end
