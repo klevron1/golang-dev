@@ -42,5 +42,5 @@ https://atlas.hashicorp.com/bento/
 rake go               # golang-dev first time install
 rake modules          # downloads puppet module dependencies
 rake psql             # open psql prompt within the golang-dev vm
-rake spec:golang-dev  # Run serverspec tests to golang-dev
+rake spec:golang-dev  # run serverspec tests to golang-dev
 ```
