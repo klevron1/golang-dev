@@ -33,12 +33,12 @@ Vagrant.configure('2') do |config|
 
     # install puppet agent 1.3.4
     m.vm.provision :shell do |shell|
-      shell.path = "scripts/install_puppet_and_modules.sh"
+      shell.path = "scripts/install_puppet.sh"
     end
 
     # run puppet apply
     m.vm.provision :shell do |shell|
-      shell.inline = "/opt/puppetlabs/bin/puppet apply /vagrant/manifests/init.pp"
+      shell.inline = "/opt/puppetlabs/bin/puppet apply --modulepath /vagrant/modules /vagrant/manifests/init.pp"
     end
 
     #m.vm.provision :puppet do |puppet|

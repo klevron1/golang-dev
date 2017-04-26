@@ -1,1 +1,4 @@
+.rspec
 .vagrant/
+Gemfile.lock
+modules/

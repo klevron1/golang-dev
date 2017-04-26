@@ -13,18 +13,18 @@ rabbitmq_user { 'testuser':
   provider => 'rabbitmqctl',
 }
 
-rabbitmq_vhost { 'golang-vhost':
+rabbitmq_vhost { 'vhost':
   ensure   => present,
   provider => 'rabbitmqctl',
 }
 
-rabbitmq_user_permissions { 'testuser@golang-vhost':
+rabbitmq_user_permissions { 'testuser@/':
   configure_permission => '.*',
   read_permission      => '.*',
   write_permission     => '.*',
 }
 
-rabbitmq_exchange { 'test-exchange@golang-vhost':
+rabbitmq_exchange { 'testexchange@/':
   user     => 'testuser',
   password => 'S3cr3t',
   type     => 'topic',
@@ -34,10 +34,10 @@ rabbitmq_exchange { 'test-exchange@golang-vhost':
   durable => true,
   arguments => {
     hash-header => 'message-distribution-hash'
-  },
+  }
 }
 
-rabbitmq_queue { 'test-queue@golang-vhost':
+rabbitmq_queue { 'testqueue@/':
   user        => 'testuser',
   password    => 'S3cr3t',
   durable     => true,
