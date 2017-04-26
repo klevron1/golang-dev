@@ -7,6 +7,14 @@ Vagrant machine for golang development
 * VMware Fusion >= 6.0
 * Vagrant with Fusion Plugin
 
+***Componants Installed***
+* Zookeeper 3.4.5
+* PostgreSQL 9.4
+* RabbitMQ 3.3.5
+* Golang 1.8.1
+
+***Getting up and running***
+
 1. Install Gem Dependencies
 
     `bundle install`
@@ -19,9 +27,9 @@ Vagrant machine for golang development
 
    `vagrant up`
 
-4. Run serverspec tests to make sure all the services properly installed
+4. Run serverspec tests to make sure all the services properly installed and are running
 
-   `bundle exec rake spec:all`
+   `bundle exec rake spec`
 
 5. Simplify downloading modules, creating the virtual machine and running serverspec tests into one easy step?
 
