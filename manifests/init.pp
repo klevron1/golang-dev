@@ -68,6 +68,25 @@ class { 'golang':
   workspace => '/usr/local/src/go',
 }
 
+yum::group { 'Development Tools':
+  ensure  => present,
+  timeout => 600,
+}
+
+file_line { 'gopath':
+  path => '/home/vagrant/.bash_profile',
+  line => 'export GOPATH=$HOME/work',
+}
+
+file_line { 'work/bin to path':
+  path => '/home/vagrant/.bash_profile',
+  line => 'export PATH=$PATH:$(go env GOPATH)/bin',
+}
+
+file { '/home/vagrant/work':
+  ensure => 'directory',
+}
+
 class { 'postgresql::globals':
   manage_package_repo => true,
 #  contrib_package_name => 'postgresql94-contrib',
