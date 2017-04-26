@@ -89,6 +89,7 @@ file { '/home/vagrant/work':
 
 class { 'postgresql::globals':
   manage_package_repo => true,
+#  contrib_package_name => 'postgresql94-contrib',
   version             => '9.4',
 }->
 class { 'postgresql::server':
@@ -97,6 +98,11 @@ class { 'postgresql::server':
   ip_mask_allow_all_users    => '0.0.0.0/0',
   listen_addresses           => '*',
   postgres_password          => 'S3cr3t',
+}
+
+class { 'postgresql::server::contrib':
+  package_ensure => 'present',
+  package_name => 'postgresql94-contrib',
 }
 
 postgresql::server::db { 'golang-database':
