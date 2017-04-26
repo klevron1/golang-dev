@@ -1,5 +1,6 @@
 # golang-dev
-Vagrant machine for golang development
+Vagrant machine for golang development using Chef Bento maintained CentOS 7.3 image. Other Bento box files can be located here:
+https://atlas.hashicorp.com/bento/
 
 ## To build
 
@@ -7,7 +8,7 @@ Vagrant machine for golang development
 * VMware Fusion >= 6.0
 * Vagrant with Fusion Plugin
 
-***Componants Installed***
+***Components Installed***
 * Zookeeper 3.4.5
 * PostgreSQL 9.4
 * RabbitMQ 3.3.5
@@ -27,7 +28,7 @@ Vagrant machine for golang development
 
    `vagrant up`
 
-4. Run serverspec tests to make sure all the services properly installed and are running
+4. Run serverspec tests to make sure all the components properly installed and are running
 
    `bundle exec rake spec`
 
