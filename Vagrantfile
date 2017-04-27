@@ -8,7 +8,6 @@ Vagrant.configure('2') do |config|
 
   config.vm.box_download_insecure = true
   config.vm.define :'golang-dev' do |m|
-#    m.vm.box = 'centos/7'
     m.vm.box = "bento/centos-7.3"
 
     # RabbitMQ
@@ -41,9 +40,11 @@ Vagrant.configure('2') do |config|
       shell.inline = "/opt/puppetlabs/bin/puppet apply --modulepath /vagrant/modules /vagrant/manifests/init.pp"
     end
 
-    #m.vm.provision :puppet do |puppet|
-    #  puppet.manifests_path = 'manifests'
-    #  puppet.manifest_file  = 'init.pp'
-    #end
+    # install dlv command for golang debugging. Running as a seperate script to prevent being run with sudo
+    m.vm.provision :shell do |shell|
+      shell.path = "scripts/install_delve.ssh"
+      shell.privileged = false
+    end
+
   end
 end
