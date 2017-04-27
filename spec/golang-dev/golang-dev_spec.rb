@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Test zookeeper package and service" do
+describe "Test zookeeper package successfully installed and service successfully started" do
 
   describe package('zookeeper') do
     it { should be_installed }
@@ -16,7 +16,7 @@ describe "Test zookeeper package and service" do
   end
 end
 
-describe "Test postgresql-9.4 package and service" do
+describe "Test postgresql-9.4 package successfully installed and service successfully started" do
   describe package('postgresql94-server') do
     it { should be_installed }
   end
@@ -35,7 +35,7 @@ describe "Test postgresql-9.4 package and service" do
   end
 end
 
-describe "Test rabbitmq packages and service" do
+describe "Test rabbitmq packages successfully installed and service successfully started" do
   describe package('java-1.8.0-openjdk') do
     it { should be_installed }
   end
@@ -57,12 +57,20 @@ describe "Test rabbitmq packages and service" do
     it { should be_listening }
   end
 end
-describe "Test golang package" do
+describe "Test expected golang package version successfully installed" do
   describe command('/usr/local/go/bin/go version') do
     its(:stdout) { should match /go version go1.8.1 linux\/amd64/ }
   end
+end
 
-  describe package('gcc') do
-    it { should be_installed }
+describe "Test that 'go get github.com/derekparker/delve/cmd/dlv' successfully run" do
+  describe file('/home/vagrant/work/bin/dlv') do
+    it { should exist }
+  end
+end
+
+describe "Test that yum group 'Development Tools' successfully installed" do
+  describe command("yum grouplist | sed '/^Installed Groups:/,$!d;/^Available Groups:/,$d;/^Installed Groups:/d;s/^[[:space:]]*//'") do
+    its(:stdout) { should contain('Development Tools') }
   end
 end
