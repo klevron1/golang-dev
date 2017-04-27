@@ -88,6 +88,8 @@ file_line { 'work/bin to path':
 
 file { '/home/vagrant/work':
   ensure => 'directory',
+  owner  => 'vagrant',
+  group  => 'vagrant',
 }
 
 class { 'postgresql::globals':
