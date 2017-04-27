@@ -21,6 +21,8 @@ namespace :spec do
     RSpec::Core::RakeTask.new(target.to_sym) do |t|
       ENV['TARGET_HOST'] = original_target
       t.pattern = "spec/#{original_target}/*_spec.rb"
+      t.fail_on_error = false
+      t.rspec_opts = "--format documentation"
     end
   end
 end

@@ -73,6 +73,9 @@ yum::group { 'Development Tools':
   timeout => 600,
 }
 
+$packages = [ 'screen', 'vim', 'git', 'tree' ]
+  package { $packages: ensure => 'installed' }
+
 file_line { 'gopath':
   path => '/home/vagrant/.bash_profile',
   line => 'export GOPATH=$HOME/work',
@@ -89,9 +92,9 @@ file { '/home/vagrant/work':
 
 class { 'postgresql::globals':
   manage_package_repo => true,
-#  contrib_package_name => 'postgresql94-contrib',
   version             => '9.4',
-}->
+}
+
 class { 'postgresql::server':
   service_manage             => true,
   ip_mask_deny_postgres_user => '0.0.0.0/32',
