@@ -86,12 +86,6 @@ file_line { 'work/bin to path':
   line => 'export PATH=$PATH:$(go env GOPATH)/bin',
 }
 
-file { '/home/vagrant/work':
-  ensure => 'directory',
-  owner  => 'vagrant',
-  group  => 'vagrant',
-}
-
 class { 'postgresql::globals':
   manage_package_repo => true,
   version             => '9.4',
