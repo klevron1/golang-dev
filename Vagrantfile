@@ -45,5 +45,7 @@ Vagrant.configure('2') do |config|
     #  puppet.manifests_path = 'manifests'
     #  puppet.manifest_file  = 'init.pp'
     #end
+
+    config.vm.synced_folder "work/", "/home/vagrant/work", create: true	
   end
 end
