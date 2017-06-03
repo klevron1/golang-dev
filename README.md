@@ -13,6 +13,7 @@ https://atlas.hashicorp.com/bento/
 * PostgreSQL 9.4
 * RabbitMQ 3.3.5
 * Golang 1.8.1
+* Delve debugger for golang
 
 ***Getting up and running***
 
