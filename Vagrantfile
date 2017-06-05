@@ -47,5 +47,6 @@ Vagrant.configure('2') do |config|
       shell.privileged = false
     end
 
+    config.vm.synced_folder "work/", "/home/vagrant/work", create: true
   end
 end
