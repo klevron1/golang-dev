@@ -78,15 +78,21 @@ $packages = [ 'screen', 'vim', 'git', 'tree' ]
 
 file_line { 'gopath':
   path => '/home/vagrant/.bash_profile',
-  line => 'export GOPATH=$HOME/work',
+  line => 'export GOPATH=/workspace/go',
 }
 
-file_line { 'gopath':
+file_line { 'gobin':
   path => '/home/vagrant/.bash_profile',
-  line => ['export GOBIN=$(go env GOPATH)/bin/$(go env GOOS)_$(go env GOARCH)', 'mkdir -p $GOBIN']
+  line => 'export GOBIN=$(go env GOPATH)/bin/$(go env GOOS)_$(go env GOARCH)',
 }
 
-file_line { 'GOBIN to path':
+file_line { 'gobin dir':
+  path => '/home/vagrant/.bash_profile',
+  line => 'mkdir -p $GOBIN',
+  require => File_line['gobin'],
+}
+
+file_line { 'gobin to path':
   path => '/home/vagrant/.bash_profile',
   line => 'export PATH=$PATH:$(go env GOBIN)',
 }
