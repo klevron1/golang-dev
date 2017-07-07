@@ -81,9 +81,14 @@ file_line { 'gopath':
   line => 'export GOPATH=$HOME/work',
 }
 
-file_line { 'work/bin to path':
+file_line { 'gopath':
   path => '/home/vagrant/.bash_profile',
-  line => 'export PATH=$PATH:$(go env GOPATH)/bin',
+  line => ['export GOBIN=$(go env GOPATH)/bin/$(go env GOOS)_$(go env GOARCH)', 'mkdir -p $GOBIN']
+}
+
+file_line { 'GOBIN to path':
+  path => '/home/vagrant/.bash_profile',
+  line => 'export PATH=$PATH:$(go env GOBIN)',
 }
 
 class { 'postgresql::globals':

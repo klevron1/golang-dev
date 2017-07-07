@@ -7,7 +7,7 @@ Vagrant.configure('2') do |config|
   # please see the online documentation at vagrantup.com.
 
   config.vm.box_download_insecure = true
-  config.vm.synced_folder "work/", "/home/vagrant/work"
+  config.vm.synced_folder "/Users/klevron/Documents/workspace", "/workspace"
   config.vm.define :'golang-dev' do |m|
     m.vm.box = "bento/centos-7.3"
 
@@ -46,7 +46,5 @@ Vagrant.configure('2') do |config|
       shell.path = "scripts/install_delve.ssh"
       shell.privileged = false
     end
-
-    config.vm.synced_folder "work/", "/home/vagrant/work", create: true
   end
 end
