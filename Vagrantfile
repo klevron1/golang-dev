@@ -7,7 +7,7 @@ Vagrant.configure('2') do |config|
   # please see the online documentation at vagrantup.com.
 
   config.vm.box_download_insecure = true
-  config.vm.synced_folder "/Users/klevron/Documents/workspace/golang-dev", "/workspace"
+  config.vm.synced_folder "/Users/klevron/Documents/workspace", "/workspace"
   config.vm.define :'golang-dev' do |m|
     m.vm.box = "bento/centos-7.3"
 
